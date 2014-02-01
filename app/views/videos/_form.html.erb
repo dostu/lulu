@@ -1,0 +1,49 @@
+<div class="row">
+	<div class="col-lg-7">
+	<%= form_for @video, :html => {:class => "form-horizontal"} do |f| %>
+		<fieldset>
+			<div class="form-group">
+				<%= f.label :title, :class => "col-lg-2 control-label" %>
+				<div class="col-lg-10">
+					<%= f.text_field :title, :class => "form-control" %>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<%= f.label :description, :class => "col-lg-2 control-label" %>
+				<div class="col-lg-10">
+					<%= f.text_area :description, :rows => 5, :class => "form-control" %>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<%= f.label :youtube_id, "Youtube ID", :class => "col-lg-2 control-label" %>
+				<div class="col-lg-10">
+					<%= f.text_field :youtube_id, :class => "form-control" %>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<%= f.label :category, :class => "col-lg-2 control-label" %>
+				<div class="col-lg-10">
+					<%= f.collection_select(:category_id, Category.all, :id, :name) %>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<%= f.label :price, :class => "col-lg-2 control-label" %>
+				<div class="col-lg-10">
+					<%= f.text_field :price, :class => "form-control" %>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="colg-lg-10 col-lg-offset-2">
+					<%= link_to "Cancel", videos_path, :class => "btn btn-default" %>
+					<%= f.submit :class => "btn btn-success" %>
+				</div>
+			</div>
+		</fieldset>
+	<% end %>
+	</div>
+</div>
