@@ -10,6 +10,7 @@ class VideosController < ApplicationController
 
 	def create
 		@video = Video.new(params[:video].permit(:title, :description, :youtube_id, :category_id, :price))
+		@video.user = current_user
 		@video.save
 		redirect_to @video
 	end
@@ -17,6 +18,7 @@ class VideosController < ApplicationController
 	def show
 		@video = Video.find(params[:id])
 		@category = @video.category
+		@comments = @video.comments
 	end
 
 	def edit 

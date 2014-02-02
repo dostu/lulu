@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140201231317) do
+ActiveRecord::Schema.define(version: 20140202113230) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -19,6 +19,17 @@ ActiveRecord::Schema.define(version: 20140201231317) do
     t.datetime "updated_at"
     t.string   "image"
   end
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.text     "body"
+    t.integer  "video_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+  add_index "comments", ["video_id"], name: "index_comments_on_video_id"
 
   create_table "users", force: true do |t|
     t.string   "username"
@@ -38,8 +49,10 @@ ActiveRecord::Schema.define(version: 20140201231317) do
     t.string   "youtube_id"
     t.integer  "category_id"
     t.decimal  "price",       precision: 8, scale: 2
+    t.integer  "user_id"
   end
 
   add_index "videos", ["category_id"], name: "index_videos_on_category_id"
+  add_index "videos", ["user_id"], name: "index_videos_on_user_id"
 
 end

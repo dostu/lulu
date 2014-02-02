@@ -4,21 +4,20 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-8">
+		<div class="col-lg-7">
 			<iframe width="640" height="360" src="//www.youtube.com/embed/<%= @video.youtube_id %>" frameborder="0" allowfullscreen></iframe>
 
 			<p><%= @video.description %></p>
-
 		</div>
 
-		<div class="col-lg-4">
+		<div class="col-lg-4 col-lg-offset-1">
 
 			<div>
 				<%= link_to @category.name, category_path(@category) %>
 			</div>
 
 			<div>
-				<p class="price">$<%= @video.price %></p>
+				<p class="price"><%= number_to_currency(@video.price) %></p>
 				<%= link_to "Purchase", "#", :class => "btn btn-success btn-lg" %>
 			</div>
 
@@ -27,6 +26,34 @@
 				<%= link_to "Delete Video", video_path(@video), 
 							method: :delete, data: { confirm: 'Are you sure?' } %>	
 			</div>			
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-7 comments">
+			<h2 class="heading-with-badge">Comments</h2> <span class="badge"><%= @comments.count %></span>
+			<% @comments.each do |comment| %>
+				<blockquote>
+					<p><%= comment.body %></p>
+					<small>
+						<%= comment.user.username %>, <%="#{time_ago_in_words(comment.created_at)} ago"%>
+					</small>
+					<% if current_user == comment.user || current_user == @video.user %>
+		      			<%= link_to 'Destroy Comment', [comment.video, comment], method: :delete %>
+		      		<% end %>
+				</blockquote>
+			<% end %>
+			<h3>Add a comment:</h3>
+			<%= form_for([@video, @video.comments.build]) do |f| %>
+			  <div class="form-group">
+					<%= f.text_area :body, :rows => 4, :class => "form-control" %>
+			  </div>
+
+			  <div class="form-group">
+			  	<%= f.submit :class => "btn btn-primary" %>
+			  </div>
+			<% end %>
+
 		</div>
 	</div>
 </div>

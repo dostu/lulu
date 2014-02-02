@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
 	attr_accessor :password
 
+	has_many :comments
+	has_many :videos
+
 	before_save :encrypt_password
 
 	validates_confirmation_of :password

@@ -9,3 +9,15 @@ body {
 .price {
 	font-size: 3em;
 }
+
+.heading-with-badge {
+	display: inline-block;
+}
+
+.comments .badge {
+	position: absolute;
+	top: 26px;
+	margin-left: 13px;
+	font-size: 16px;
+	line-height: 1.5;
+}
