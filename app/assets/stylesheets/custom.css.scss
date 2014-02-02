@@ -2,22 +2,12 @@ body {
 	padding-top: 50px;
 }
 
-.video {
-	margin: 20px 0;
+.video-thumbnail {
+	padding: 18px;
 }
 
 .price {
 	font-size: 3em;
-}
-
-.heading-with-badge {
-	display: inline-block;
-}
-
-.comments .badge {
-	position: absolute;
-	top: 33px;
-	margin-left: 10px;
 }
 
 iframe {
@@ -29,6 +19,12 @@ img {
 	height: auto;
 }
 
-iframe.disabled {
-    pointer-events:none;
+div.disable {
+	display:block; 
+	margin-left: 15px; 
+	position:absolute; 
+	top: 0; 
+	left: 0; 
+	width: 853px;
+	height: 480px;
 }

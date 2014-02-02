@@ -2,16 +2,10 @@
 	<h1>Categories</h1>
 </div>
 
-<%= link_to "Add Category", new_category_path, :class => "btn btn-success" %>
-
+<% if is_admin? then %>
+	<%= link_to "Add Category", new_category_path, :class => "btn btn-success" %>
+<% end %> 
 
 <div class="row">
-<% @categories.each do |category| %>
-	<% if category.videos.any? %>
-		<div class="col-lg-6 video">
-			<img src="http://img.youtube.com/vi/<%= category.videos.first.youtube_id %>/0.jpg" />
-			<h3><%= link_to category.name, category_path(category) %></h3>
-		</div>
-	<% end %>
-<% end %>
+	<%= render @categories %>
 </div>

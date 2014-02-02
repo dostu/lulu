@@ -1,0 +1,9 @@
+<div class="col-lg-6 video-thumbnail">
+	<% if category.videos.any? %>
+		<img src="http://img.youtube.com/vi/<%= category.videos.first.youtube_id %>/0.jpg" />
+	<% else %>
+		<%= image_tag "blank.png" %>
+	<% end %>
+	
+	<h3><%= link_to category.name, category_path(category) %></h3>
+</div>

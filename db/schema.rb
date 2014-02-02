@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140202180713) do
+ActiveRecord::Schema.define(version: 20140202202320) do
 
   create_table "accounts", force: true do |t|
     t.decimal  "balance"
@@ -70,8 +70,9 @@ ActiveRecord::Schema.define(version: 20140202180713) do
     t.datetime "updated_at"
     t.string   "youtube_id"
     t.integer  "category_id"
-    t.decimal  "price",       precision: 8, scale: 2
+    t.decimal  "price",          precision: 8, scale: 2
     t.integer  "user_id"
+    t.integer  "purchase_count"
   end
 
   add_index "videos", ["category_id"], name: "index_videos_on_category_id"

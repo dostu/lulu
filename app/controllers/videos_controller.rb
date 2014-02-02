@@ -1,7 +1,13 @@
 class VideosController < ApplicationController
 
+	before_action :require_login, :only=>[:new] 
+
 	def index
-		@videos = Video.all
+		if params[:search] then
+			@videos = Video.where('title LIKE ?', "%#{params[:search]}%");
+		else 
+			@videos = Video.all
+		end
 	end
 
 	def new
@@ -20,7 +26,9 @@ class VideosController < ApplicationController
 		@category = @video.category
 		@comments = @video.comments
 		@purchase = Purchase.new
-		@purchased = current_user.purchased?(@video)
+		if current_user then
+			@purchased = current_user.purchased?(@video)
+		end
 	end
 
 	def edit 
@@ -42,6 +50,6 @@ class VideosController < ApplicationController
 		@video.destroy
 
 		redirect_to videos_path
-	end
+	end  
 
 end

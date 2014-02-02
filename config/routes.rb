@@ -1,4 +1,5 @@
 Lulu::Application.routes.draw do
+  get "page/home"
   get "login" => "sessions#new", :as => "login"
   get "logout" => "sessions#destroy", :as => "logout"
   get "signup" => "users#new", :as => "signup"
@@ -23,7 +24,7 @@ Lulu::Application.routes.draw do
   resources :purchases
 
   # You can have the root of your site routed with "root"
-  root 'videos#index'
+  root 'pages#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

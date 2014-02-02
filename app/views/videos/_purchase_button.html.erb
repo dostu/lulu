@@ -1,0 +1,8 @@
+<% if @purchased then %>
+	<%= link_to "Bought", "#", :class => "btn btn-success btn-lg disabled" %>
+<% elsif not current_user or @video.user != current_user  %>
+	<%= form_for @purchase do |f| %> 
+		<%= f.hidden_field :video_id, :value => @video.id %>
+		<%= f.submit "Buy", :class => "btn btn-success btn-lg" %>
+	<% end %>
+<% end %>

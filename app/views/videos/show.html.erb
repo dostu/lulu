@@ -5,70 +5,31 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-9">
-			<% if (@purchased) then %>
-				<iframe width="853" height="480" src="//www.youtube.com/embed/<%= @video.youtube_id %>" frameborder="0" allowfullscreen></iframe>
-			<% else %>
-				<iframe class="disabled" width="853" height="480" src="//www.youtube.com/embed/<%= @video.youtube_id %>" frameborder="0" allowfullscreen></iframe>
-			<% end %>
+			<%= render 'full_video' %>
 			<p><%= @video.description %></p>
 		</div>
 
 		<div class="col-lg-3">
-
 			<% if @category %>
-				<div>
-					<%= link_to @category.name, category_path(@category) %>
-				</div>
+			<div>
+				<%= link_to @category.name, category_path(@category) %>
+			</div>
 			<% end %>
 
 			<div>
 				<p class="price"><%= number_to_currency(@video.price) %></p>
-				<% unless @purchased then %>
-					<%= form_for @purchase do |f| %> 
-						<%= f.hidden_field :user_id, :value => current_user.id %>
-						<%= f.hidden_field :video_id, :value => @video.id %>
-						<%= f.submit "Buy", :class => "btn btn-success btn-lg" %>
-					<% end %>
-				<% else %>
-					<%= link_to "Bought", "#", :class => "btn btn-success btn-lg disabled" %>
-				<% end %>
-
-
+				<%= render 'purchase_button' %>
 			</div>
 
-			<div>
-				<%= link_to "Edit Video", edit_video_path(@video) %> |
-				<%= link_to "Delete Video", video_path(@video), 
-							method: :delete, data: { confirm: 'Are you sure?' } %>	
-			</div>			
+			<%= render 'editing_buttons' %>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-lg-7 comments">
-			<h2 class="heading-with-badge">Comments</h2> <span class="badge"><%= @comments.count %></span>
-			<% @comments.each do |comment| %>
-				<blockquote>
-					<p><%= comment.body %></p>
-					<small>
-						<%= comment.user.username %>, <%="#{time_ago_in_words(comment.created_at)} ago"%>
-					</small>
-					<% if current_user == comment.user || current_user == @video.user %>
-		      			<%= link_to 'Remove', [comment.video, comment], method: :delete %>
-		      		<% end %>
-				</blockquote>
-			<% end %>
-			<h3>Add a comment:</h3>
-			<%= form_for([@video, @video.comments.build]) do |f| %>
-			  <div class="form-group">
-					<%= f.text_area :body, :rows => 4, :class => "form-control" %>
-			  </div>
-
-			  <div class="form-group">
-			  	<%= f.submit :class => "btn btn-primary" %>
-			  </div>
-			<% end %>
-
+			<%= render 'comments' %>
+			
+			<%= render 'new_comment' %>
 		</div>
 	</div>
 </div>

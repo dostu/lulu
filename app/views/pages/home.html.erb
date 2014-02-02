@@ -1,0 +1,15 @@
+<div class="page-header" id="banner">
+	<h1>Popular videos</h1>
+</div>
+
+<% @videos.in_groups_of(2) do |videos| %>
+	<div class="row">
+		<%= render videos %>
+	</div>
+<% end %>
+
+<div class="page-header" id="banner">
+	<h1>Categories</h1>
+</div>
+
+<%= render @categories %>

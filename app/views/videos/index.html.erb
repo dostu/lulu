@@ -1,12 +1,10 @@
 <div class="page-header" id="banner">
-	<div class="row">
-		<div class="col-lg-6">
-			<h1>Videos</h1>
-		</div>
-	</div>
+	<h1>Videos</h1>
 </div>
 <%= link_to "Add Video", new_video_path, :class => "btn btn-success" %>
 
-<div class="row">
-	<%= render @videos %>
-</div>
+<% @videos.in_groups_of(2, false) do |videos| %>
+	<div class="row">
+		<%= render videos %>
+	</div>
+<% end %>
