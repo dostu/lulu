@@ -14,5 +14,16 @@ class UsersController < ApplicationController
 
   def show
   	@user = current_user
+    @purchased_videos_count = @user.purchased_videos.count
+    @purchased_videos = @user.purchased_videos.limit(4).order(created_at: :desc)
+    @videos_count = @user.videos.count
+    @videos = @user.videos.limit(4)
   end
+
+  def money
+    @user = current_user
+    @user.account.add_money
+    redirect_to user_path(@user)
+  end
+
 end

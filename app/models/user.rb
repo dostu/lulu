@@ -3,13 +3,17 @@ class User < ActiveRecord::Base
 
 	has_many :comments
 	has_many :videos
+	has_many :purchases
+	has_many :purchased_videos, through: :purchases, source: :video
+	has_one :account
 
 	before_save :encrypt_password
+	after_create :create_account
 
-	validates_confirmation_of :password
-	validates_presence_of :password, :on => :create
-	validates_presence_of :username
-	validates_uniqueness_of :username
+	validates :password, confirmation: true
+	validates :password_confirmation, presence: true
+	validates :username, presence: true
+	validates :username, uniqueness: true
 
 	def self.authenticate(username, password)
 		user = find_by_username(username)
@@ -26,4 +30,15 @@ class User < ActiveRecord::Base
 			self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
 		end
 	end
+
+	def purchased?(video)
+		purchased_videos.include?(video)
+	end
+
+	def create_account 
+		account = Account.new(user: self, balance: 100)
+		account.save
+		self.account = account
+	end
+
 end

@@ -12,9 +12,15 @@ Lulu::Application.routes.draw do
   
   resources :categories
 
-  resources :users
+  resources :users do
+    member do
+      post 'money', as: :money
+    end
+  end
 
   resources :sessions
+
+  resources :purchases
 
   # You can have the root of your site routed with "root"
   root 'videos#index'

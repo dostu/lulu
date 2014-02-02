@@ -1,1 +1,46 @@
-<h1><%= @user.username %></h1>
+<div class="page-header">
+	<h1><%= @user.username %></h1>
+</div>
+
+<div class"row">
+	<div class="col-lg-12">	
+		<p class="lead">Balance: <span class="text-success"><%= number_to_currency(@user.account.balance) %></span></p> 
+
+		<%= form_tag money_user_path do |f| %> 
+			<%= submit_tag "Get money", :class => "btn btn-success btn-lg" %>
+		<% end %>
+	</div>
+</div>
+
+
+<div class"row">
+	<div class="col-lg-12">
+		<div class="page-header">
+			<h3>Videos (<%= @purchased_videos_count %>)</h3>
+			<div class"row">
+				<% @purchased_videos.each do |video| %>
+					<div class="col-lg-3 video">
+						<img src="http://img.youtube.com/vi/<%= video.youtube_id %>/0.jpg" />
+						<h4><%= link_to video.title, video_path(video) %></h4>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class"row">
+	<div class="col-lg-12">
+		<div class="page-header">
+			<h3>My videos (<%= @videos_count %>)</h3>
+			<div class"row">
+				<% @videos.each do |video| %>
+					<div class="col-lg-3 video">
+						<img src="http://img.youtube.com/vi/<%= video.youtube_id %>/0.jpg" />
+						<h4><%= link_to video.title, video_path(video) %></h4>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

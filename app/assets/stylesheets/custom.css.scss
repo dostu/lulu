@@ -16,8 +16,19 @@ body {
 
 .comments .badge {
 	position: absolute;
-	top: 26px;
-	margin-left: 13px;
-	font-size: 16px;
-	line-height: 1.5;
+	top: 33px;
+	margin-left: 10px;
+}
+
+iframe {
+	margin-bottom: 20px;
+}
+
+img {
+	width: 100%;
+	height: auto;
+}
+
+iframe.disabled {
+    pointer-events:none;
 }

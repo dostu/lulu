@@ -4,21 +4,36 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-7">
-			<iframe width="640" height="360" src="//www.youtube.com/embed/<%= @video.youtube_id %>" frameborder="0" allowfullscreen></iframe>
-
+		<div class="col-lg-9">
+			<% if (@purchased) then %>
+				<iframe width="853" height="480" src="//www.youtube.com/embed/<%= @video.youtube_id %>" frameborder="0" allowfullscreen></iframe>
+			<% else %>
+				<iframe class="disabled" width="853" height="480" src="//www.youtube.com/embed/<%= @video.youtube_id %>" frameborder="0" allowfullscreen></iframe>
+			<% end %>
 			<p><%= @video.description %></p>
 		</div>
 
-		<div class="col-lg-4 col-lg-offset-1">
+		<div class="col-lg-3">
 
-			<div>
-				<%= link_to @category.name, category_path(@category) %>
-			</div>
+			<% if @category %>
+				<div>
+					<%= link_to @category.name, category_path(@category) %>
+				</div>
+			<% end %>
 
 			<div>
 				<p class="price"><%= number_to_currency(@video.price) %></p>
-				<%= link_to "Purchase", "#", :class => "btn btn-success btn-lg" %>
+				<% unless @purchased then %>
+					<%= form_for @purchase do |f| %> 
+						<%= f.hidden_field :user_id, :value => current_user.id %>
+						<%= f.hidden_field :video_id, :value => @video.id %>
+						<%= f.submit "Buy", :class => "btn btn-success btn-lg" %>
+					<% end %>
+				<% else %>
+					<%= link_to "Bought", "#", :class => "btn btn-success btn-lg disabled" %>
+				<% end %>
+
+
 			</div>
 
 			<div>
@@ -39,7 +54,7 @@
 						<%= comment.user.username %>, <%="#{time_ago_in_words(comment.created_at)} ago"%>
 					</small>
 					<% if current_user == comment.user || current_user == @video.user %>
-		      			<%= link_to 'Destroy Comment', [comment.video, comment], method: :delete %>
+		      			<%= link_to 'Remove', [comment.video, comment], method: :delete %>
 		      		<% end %>
 				</blockquote>
 			<% end %>

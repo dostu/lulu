@@ -19,6 +19,8 @@ class VideosController < ApplicationController
 		@video = Video.find(params[:id])
 		@category = @video.category
 		@comments = @video.comments
+		@purchase = Purchase.new
+		@purchased = current_user.purchased?(@video)
 	end
 
 	def edit 
