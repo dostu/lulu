@@ -1,8 +1,9 @@
 <div class="page-header">
 	<h1><%= @user.username %></h1>
+	<%= link_to "Add Video", new_video_path, :class => "btn btn-success" %>
 </div>
 
-<div class"row">
+<div class="row">
 	<div class="col-lg-12">	
 		<p class="lead">Balance: <span class="text-success"><%= number_to_currency(@user.account.balance) %></span></p> 
 
@@ -13,34 +14,22 @@
 </div>
 
 
-<div class"row">
-	<div class="col-lg-12">
-		<div class="page-header">
-			<h3>Videos (<%= @purchased_videos_count %>)</h3>
-			<div class"row">
-				<% @purchased_videos.each do |video| %>
-					<div class="col-lg-3 video">
-						<img src="http://img.youtube.com/vi/<%= video.youtube_id %>/0.jpg" />
-						<h4><%= link_to video.title, video_path(video) %></h4>
-					</div>
-				<% end %>
-			</div>
-		</div>
-	</div>
+<div class="page-header">
+	<h3>Videos (<%= @purchased_videos_count %>)</h3>
 </div>
 
-<div class"row">
-	<div class="col-lg-12">
-		<div class="page-header">
-			<h3>My videos (<%= @videos_count %>)</h3>
-			<div class"row">
-				<% @videos.each do |video| %>
-					<div class="col-lg-3 video">
-						<img src="http://img.youtube.com/vi/<%= video.youtube_id %>/0.jpg" />
-						<h4><%= link_to video.title, video_path(video) %></h4>
-					</div>
-				<% end %>
-			</div>
-		</div>
+<% @purchased_videos.in_groups_of(3, false) do |videos| %>
+	<div class="row">
+		<%= render videos %>
 	</div>
+<% end %>
+
+<div class="page-header">
+	<h3>My videos (<%= @videos_count %>)</h3>
 </div>
+
+<% @videos.in_groups_of(3, false) do |videos| %>
+	<div class="row">
+		<%= render videos %>
+	</div>
+<% end %>

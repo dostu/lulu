@@ -14,17 +14,9 @@
       <ul class="nav navbar-nav">
         <%= render 'layouts/navigation_links' %>
       </ul>
-      <%= form_tag videos_path, method: :get, class: "navbar-form navbar-left" do %>
-        <%= text_field_tag :search, nil, placeholder: 'Search', class: "form-control col-lg-8" %>
-      <% end %>
+      <%= render 'layouts/search' %>
       <ul class="nav navbar-nav navbar-right">
-        <% if current_user %>
-          <li><%= link_to current_user.username, user_path(current_user) %></li>
-          <li><%= link_to "Logout", logout_path %></li>
-        <% else %>
-          <li><%= link_to "Signup", signup_path %></li>
-          <li><%= link_to "Login", login_path %></li>
-        <% end %>
+        <%= render 'layouts/user_links' %>
       </ul>
     </div>
   </div>

@@ -3,7 +3,7 @@ body {
 }
 
 .video-thumbnail {
-	padding: 18px;
+	padding: 10px;
 }
 
 .price {
@@ -27,4 +27,18 @@ div.disable {
 	left: 0; 
 	width: 853px;
 	height: 480px;
+}
+
+.page-header {
+	position: relative;
+}
+
+.page-header h1 {
+	display: inline-block;
+}
+
+.page-header a {
+	position: absolute;
+	right: 5px;
+	bottom: 20px;
 }

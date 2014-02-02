@@ -15,9 +15,9 @@ class UsersController < ApplicationController
   def show
   	@user = current_user
     @purchased_videos_count = @user.purchased_videos.count
-    @purchased_videos = @user.purchased_videos.limit(4).order(created_at: :desc)
+    @purchased_videos = @user.purchased_videos.order(created_at: :desc).take(6)
     @videos_count = @user.videos.count
-    @videos = @user.videos.limit(4)
+    @videos = @user.videos.order(created_at: :desc).take(6)
   end
 
   def money

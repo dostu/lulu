@@ -9,4 +9,12 @@ class Video < ActiveRecord::Base
 	def self.popular
 		self.all.order(purchase_count: :desc)
 	end
+
+	def increment_purchase_count 
+		self.purchase_count += 1
+	end
+
+	def thumbnail
+		"http://img.youtube.com/vi/#{self.youtube_id}/0.jpg"
+	end
 end
