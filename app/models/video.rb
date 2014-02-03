@@ -21,6 +21,10 @@ class Video < ActiveRecord::Base
 		"http://img.youtube.com/vi/#{self.youtube_id}/0.jpg"
 	end
 
+	def self.search(query)
+		self.where('lower(title) LIKE ?', "%#{query.downcase}%").order(created_at: :desc);
+	end
+
 	private
 
     def default_values
