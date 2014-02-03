@@ -16,6 +16,8 @@
 			</div>
 			<% end %>
 
+			<p>Author: <%= @video.user.username %></p>
+
 			<div>
 				<p class="price"><%= number_to_currency(@video.price) %></p>
 				<%= render 'purchase_button' %>
@@ -27,9 +29,11 @@
 
 	<div class="row">
 		<div class="col-lg-7 comments">
-			<%= render 'comments' %>
+			<%= render 'comments/index' %>
 			
-			<%= render 'new_comment' %>
+			<% if @purchased then %>
+				<%= render 'new_comment' %>
+			<% end %>
 		</div>
 	</div>
 </div>

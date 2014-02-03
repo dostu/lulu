@@ -1,0 +1,9 @@
+<blockquote>
+	<p><%= comment.body %></p>
+	<small>
+		<%= comment.user.username %>, <%="#{time_ago_in_words(comment.created_at)} ago"%>
+	</small>
+	<% if current_user == comment.user || current_user == @video.user || is_admin? %>
+			<%= link_to 'Remove', [comment.video, comment], method: :delete %>
+		<% end %>
+</blockquote>

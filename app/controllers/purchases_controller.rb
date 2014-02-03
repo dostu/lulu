@@ -5,8 +5,10 @@ class PurchasesController < ApplicationController
 	def create
 		@purchase = Purchase.new(params[:purchase].permit(:video_id))
 		@purchase.user = current_user
-		@purchase.save
 		@video = Video.find(@purchase.video)
+		unless @purchase.save then
+			flash.alert = "You do not have enough money in your balance."
+		end
 		redirect_to video_path(@video)
 	end
 end

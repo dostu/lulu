@@ -4,9 +4,9 @@ class VideosController < ApplicationController
 
 	def index
 		if params[:search] then
-			@videos = Video.where('title LIKE ?', "%#{params[:search]}%");
+			@videos = Video.where('title LIKE ?', "%#{params[:search]}%").order(created_at: :desc);
 		else 
-			@videos = Video.all
+			@videos = Video.all.order(created_at: :desc);
 		end
 	end
 

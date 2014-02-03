@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 	end
 
 	def create_account 
-		account = Account.new(user: self, balance: 100)
+		account = Account.new(user: self, balance: 20)
 		account.save
 		self.account = account
 	end

@@ -14,6 +14,7 @@ class Video < ActiveRecord::Base
 
 	def increment_purchase_count 
 		self.purchase_count += 1
+		self.save
 	end
 
 	def thumbnail

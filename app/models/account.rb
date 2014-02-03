@@ -2,7 +2,7 @@ class Account < ActiveRecord::Base
 	belongs_to :user
 
 	def add_money
-		self.balance += 50
+		self.balance += 10
 		self.save
 	end
 
