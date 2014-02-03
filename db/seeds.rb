@@ -26,7 +26,7 @@ on_top_of_the_world = Video.create(
 
 on_top_of_the_world = Video.create(
 	title: "Imagine Dragons - It's Time", 
-    description: "Music video by Imagine Dragons performing It's Time. © 2012 Interscope",
+    description: "Music video by Imagine Dragons performing It's Time. (C) 2012 Interscope",
     youtube_id: "sENM2wA_FTg",
     category: music,
     price: 2.99,
